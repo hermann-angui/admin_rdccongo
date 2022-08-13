@@ -1,0 +1,74 @@
+<aside class="app-sidebar sidebar-left">
+    <!-- start: sidebar-header -->
+    <div class="sidebar-header">
+        <!-- brand -->
+        <a class="mautic-brand" href="#" style="padding:0;">
+            <img src="{{ asset('media/images/coat_rdc.png') }}" style="width:80px; margin:0px 0px -50px 0px;"/>
+        </a>
+        <!--/ brand -->
+    </div>
+    <!--/ end: sidebar-header -->
+
+    <!-- start: sidebar-content -->
+    <div class="sidebar-content">
+        <!-- scroll-content -->
+        <div class="scroll-content slimscroll">
+            <!-- start: navigation -->
+            <nav class="nav-sidebar">
+                <ul class="nav mt-10" data-toggle="menu">
+                    <li class="first nav-group">
+                        <a href="{{ path('app_home') }}" data-menu-link="mautic_dashboard_index" id="mautic_dashboard_index" data-toggle="ajax">
+                            <span class="icon pull-left fa fa-th-large"></span>
+                            <span class="nav-item-name text pull-left">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-group">
+                        <a href="javascript:void(0);" data-target="#mautic_components_root_child" data-toggle="submenu" data-parent=".nav" data-menu-link="mautic_components_root" id="mautic_components_root">
+                            <span class="arrow pull-right text-right"></span>
+                            <span class="icon pull-left fa fa-badge"></span>
+                            <span class="nav-item-name text pull-left">Visa applications</span>
+                        </a>
+                        <ul class="nav-submenu collapse" id="mautic_components_root_child" style="height: 0px;">
+                            <li class="first nav-group">
+                                <a href="{{ path('app_visa_applications') }}" data-menu-link="mautic_asset_index" id="mautic_asset_index" data-toggle="ajax">
+                                    <span class="nav-item-name text">Review and validate</span>
+                                </a>
+                            </li>
+                            <li class="nav-group">
+                                <a href="{{ path('app_home') }}" data-menu-link="mautic_form_index" id="mautic_form_index" data-toggle="ajax">
+                                    <span class="nav-item-name text">Report</span>
+                                </a>
+                            </li>
+                            <li class="nav-group">
+                                <a href="{{ path('app_home') }}" data-menu-link="mautic_form_index" id="mautic_form_index" data-toggle="ajax">
+                                    <span class="nav-item-name text">Statistiques</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-group">
+                        <a href="{{ path('app_home') }}" data-menu-link="mautic_campaign_index" id="mautic_campaign_index" data-toggle="ajax">
+                            <span class="icon pull-left fa fa-user-secret"></span>
+                            <span class="nav-item-name text pull-left">Configuration</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- start: left nav -->
+                <ul class="nav sidebar-left-dark">
+                    <li class="hidden-xs">
+                        <a href="javascript:void(0)" data-toggle="minimize" class="sidebar-minimizer">
+                            <span class="icon pull-left fa fa-backspace"></span>
+                            <span class="nav-item-name pull-left text"> Réduire le menu</span>
+                        </a>
+                    </li>
+                </ul>
+                <!--/ end: left nav -->
+
+            </nav>
+            <!--/ end: navigation -->
+        </div>
+        <!--/ scroll-content -->
+    </div>
+    <!--/ end: sidebar-content -->
+</aside>

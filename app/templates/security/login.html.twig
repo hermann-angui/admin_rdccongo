@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Login | Republic republic of congo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" type="image/x-icon" href="{{ asset('media/images/favicon.ico') }}"/>
+    <link rel="icon" sizes="192x192" href="{{ asset('media/images/favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('media/images/apple-touch-icon.png') }}"/>
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('media/fonts/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('media/css/libraries.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('media/css/app.css') }}"/>
+
+    <script>
+        var mauticBasePath = '';
+        var mauticBaseUrl = '/';
+        var mauticAjaxUrl = '/s/ajax';
+        var mauticAjaxCsrf = 'e02Y7xIQKrVZm0NSiEWWGQR5Ky1XIQfB9qNwGew-Gp0';
+        var mauticAssetPrefix = '';
+        var mauticContent = 'dashboard';
+        var mauticEnv = 'prod';
+        var mauticLang = {};
+    </script>
+    <script src="{{ asset('media/js/libraries.js') }}"></script>
+    <script src="{{ asset('media/js/app.js') }}"></script>
+    <script defer src="{{ asset('media/fonts/fontawesome-all.js') }}"></script>
+    <script data-source="mautic">
+        var mauticForms = {};
+    </script>
+
+</head>
+<body class="header-fixed">
+    <section id="main" role="main">
+        <div class="container" style="margin-top:100px;">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <div class="panel" name="form-login">
+                        <div class="panel-body">
+                            <div class="mautic-logo img-circle mb-md text-center" style="width:100px;">
+                                <img src="{{  asset('media/images/flag_congo.svg') }}" style="width:100px; margin:0px 0 0px 0;" />
+                            </div>
+
+                            <h2 class="text-center mt-10 mb-10"><strong>{{ 'evisa_issuance_system' | trans }}</strong></h2>
+
+                            {{ form_start(loginForm, {'method': 'post', 'class': 'form-group login-form'}) }}
+                            {% if error is defined %}
+                                <div class="alert alert-danger">
+                                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                                </div>
+                            {% endif %}
+                            {% if loginForm.vars.errors|length %}
+                                <div class="alert alert-danger">
+                                    {{ form_errors(loginForm) }}
+                                </div>
+                            {% endif %}
+                                <div class="input-group mb-md">
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    {{ form_widget(loginForm.email, {'attr': {'class': 'form-control input-lg required', 'placeholder': 'Username or email'} } ) }}
+                                </div>
+                                <div class="input-group mb-md">
+                                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                    {{ form_widget(loginForm.password, {'attr': {'class': 'form-control input-lg required', 'placeholder': 'Password'}}) }}
+                                </div>
+
+                                <div class="checkbox-inline custom-primary pull-left mb-20">
+                                    <label for="remember_me">
+                                        <input type="checkbox" name="_remember_me" value="_remember_me">
+                                        <span></span>
+                                        keep me logged in
+                                    </label>
+                                </div>
+
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">{{ 'sign_in' | trans }}</button>
+
+                                <div class="mt-sm text-right">
+                                    <a href="{{ path('app_register') }}">forgot your password?</a>
+                                </div>
+                            {{ form_end(loginForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4 text-center text-muted">
+                    &copy; 2022 Democratic Republic of Congo
+                </div>
+            </div>
+        </div>
+    </section>
+<!--/ end: app-wrapper -->
+</body>
+</html>

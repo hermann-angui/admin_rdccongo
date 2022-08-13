@@ -1,0 +1,51 @@
+sign_into_account: Sign in to your account
+password: Password
+email: Email
+remember_me: Remember me
+sign_in:  Sign in
+login: Login
+sign_up:  Sign up
+logout: Logout
+forgot_password: Mot de passe oublié ?
+register: Create an account
+home: Home
+apply_for_evisa: Apply for an visa
+visa: Visa
+check_status: Check status
+track_application: Track your application
+faq: FAQs
+visa_process: What's the e-visa application process ?
+about_us: About us
+contact_us: Contact us
+login_title: Please sign-in to access your e-visa application form
+evisa_issuance_system: Visa Issuance System
+rdc: Democratic Republic of Congo
+ministry_of_foreign_affairs: Ministry of Foreigns Affairs
+see_more: See more
+application_process_step_1: Fill the online application form
+application_process_step_2: Attach the required documents
+application_process_step_3: Pay for the application(s) fees
+application_process_step_4: Print visa confirmation
+application_process_step_5: Track your application
+what_is_rdc_evisa: What's an Demogratic Republic of Congo e-visa ?
+please_provide_credentials: Please provide your email and password to sign in
+create_an_account: Create a new account
+or: OR
+application_info: Application info
+personal_info: Personal info
+family_info: Family info
+finance_info: Finance info
+payment_info: Payment
+review: Review
+add_applicant_info: Add applicants
+father_info: Father info
+mother_info: Mother info
+spouse_info: Spouse info
+accompanying_info: Information of accompanying members (if any)
+application_process_step_1_msg: Gagnez en efficacité en faisant votre demande en ligne.
+application_process_step_2_msg: Gagnez en efficacité en faisant votre demande en ligne.
+application_process_step_3_msg: Gagnez en efficacité en faisant votre demande en ligne.
+application_process_step_4_msg: Gagnez en efficacité en faisant votre demande en ligne.
+invalid_password: Invalid password
+provide_password: Please enter a password
+password_invalid_character_number: Your password should be at least {{ limit }} characters,

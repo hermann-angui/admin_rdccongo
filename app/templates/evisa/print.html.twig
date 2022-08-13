@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Republique democratique du congo evisa</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        .title {
+            font-weight: normal;
+            font-size: 0.72em;
+        }
+
+        .value {
+            font-weight: bold;
+            font-size: 0.84em;
+            margin-bottom: 8px;
+        }
+
+        body{
+            background-image: url('{{ user.evisa_bg }}');
+            background-repeat: no-repeat;
+        }
+
+        div.photo {
+            position: absolute;
+            left: 34px;
+            top: 183px;
+            width:235px;
+            height:298px;
+            background-image: url('{{ user.photo }}');
+            background-position:center;
+            background-repeat: no-repeat;
+            background-size:cover;
+        }
+
+        div.info_column_left {
+            position: absolute;
+            left: 300px;
+            top: 95px;
+            width: 450px;
+            height: auto;
+            /*border: 2px solid #03e10b;*/
+        }
+
+        div.info_column_right {
+            position: absolute;
+            left: 625px;
+            top: 95px;
+            width: 250px;
+            height: auto;
+            /*border: 2px solid #b02a37;*/
+        }
+        div.document_number{
+            letter-spacing: 2px;
+            font-weight: bold;
+            font-size: 1.9em;
+            color: #cd1021;
+            position: absolute;
+            left: 770px;
+            top: 60px;
+        }
+        div.barcode {
+            position: absolute;
+            left: 325px;
+            top: 410px;
+            width: 650px;
+            height: 100px;
+            background-image: url('{{ user.barcode }}');
+            background-position:center;
+            background-repeat: no-repeat;
+            background-size:cover;
+        }
+        div.barcode img {
+            width: 200px;
+            height: 100px;
+        }
+        div.long_number {
+            position: absolute;
+            left: 32px;
+            top: 535px;
+            width: 965px;
+            display: block;
+            word-wrap:break-word;
+            -webkit-line-break: normal;
+            height: 65px;
+            font-weight: normal;
+            font-size: 1.28em;
+        }
+    </style>
+</head>
+<body>
+<div class="document_number">{{ user.document_number }}</div>
+<div class="info_column_left">
+    <div class="place_of_birth">
+     <div class="title">Place of issue</div>
+     <div class="value">{{ user.place_of_issue }}</div>
+    </div>
+    <div class="number_of_entries">
+        <div class="title">Number of entries</div>
+        <div class="value">{{ user.number_of_entries }}</div>
+    </div>
+    <div class="type">
+        <div class="title">Type</div>
+        <div class="value">{{ user.type }}</div>
+    </div>
+    <div class="surname">
+        <div class="title">Surname</div>
+        <div class="value">{{ user.surname }}</div>
+    </div>
+    <div class="given_name">
+        <div class="title">Given name(s)</div>
+        <div class="value">{{ user.given_name }}</div>
+    </div>
+    <div class="sex">
+        <div class="title">Sex</div>
+        <div class="value">{{ user.sex }}</div>
+    </div>
+    <div class="date_of_birth">
+        <div class="title">Date of birth</div>
+        <div class="value">{{ user.date_of_birth }}</div>
+    </div>
+</div>
+<div class="info_column_right">
+    <div class="passport_number">
+        <div class="title">Passport number</div>
+        <div class="value">{{ user.passport_number }}</div>
+    </div>
+    <div class="valid_from">
+        <div class="title">Date of issue</div>
+        <div class="value">{{ user.valid_from }}</div>
+    </div>
+    <div class="valid_until">
+        <div class="title">Date of expiry</div>
+        <div class="value">{{ user.valid_until }}</div>
+    </div>
+    <div class="nationality">
+        <div class="title">Nationality</div>
+        <div class="value">{{ user.nationality }}</div>
+    </div>
+</div>
+<div class="photo"></div>
+<div class="barcode"></div>
+<div class="long_number">{{ user.long_number }}</div>
+</body>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Register | Republic republic of congo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" type="image/x-icon" href="{{ asset('media/images/favicon.ico') }}"/>
+    <link rel="icon" sizes="192x192" href="{{ asset('media/images/favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('media/images/apple-touch-icon.png') }}"/>
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('media/fonts/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('media/css/libraries.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('media/css/app.css') }}"/>
+
+    <script>
+        var mauticBasePath = '';
+        var mauticBaseUrl = '/';
+        var mauticAjaxUrl = '/s/ajax';
+        var mauticAjaxCsrf = 'e02Y7xIQKrVZm0NSiEWWGQR5Ky1XIQfB9qNwGew-Gp0';
+        var mauticAssetPrefix = '';
+        var mauticContent = 'dashboard';
+        var mauticEnv = 'prod';
+        var mauticLang = {};
+    </script>
+    <script src="{{ asset('media/js/libraries.js') }}"></script>
+    <script src="{{ asset('media/js/app.js') }}"></script>
+    <script defer src="{{ asset('media/fonts/fontawesome-all.js') }}"></script>
+    <script data-source="mautic">
+        var mauticForms = {};
+    </script>
+
+</head>
+<body class="header-fixed">
+    <section id="main" role="main" class="mt-15">
+            <div class="container-fluid">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="card px-5 pt-3 rounded-0 bg-light">
+                            <div class="card-body">
+                                <div class="mb-15 text-center">
+                                    Please provide your informations to create an account
+                                    <hr>
+                                    <span class="fs-6" style="position: relative;left:100px;top: -28px;background-color: #f8f9fa;">{{ 'or' | trans }}</span>
+                                    <span>
+                                    <a class="fw-bolder text-primary" href="{{ path('app_login') }}">Sign in</a> (if you have an acount)
+                                </span>
+                                </div>
+                                {{ form_start(registrationForm) }}
+                                {% if error is defined %}
+                                    <div class="alert alert-danger">
+                                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                                    </div>
+                                {% endif %}
+                                <div class="row pa-10 mb-3">
+                                    <div class="col-md-4">
+                                        <div class="inpt-form-group">
+                                            <label for="firstName">{{ form_label(registrationForm.firstname) }}*</label>
+                                            <div class="inpt-group">
+                                                {{ form_widget(registrationForm.firstname, {'attr': {'class': 'inpt-control required'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="inpt-form-group">
+                                            <label for="middleName">{{ form_label(registrationForm.middlename) }}</label>
+                                            <div class="inpt-group">
+                                                {{ form_widget(registrationForm.middlename, {'attr': {'class': 'inpt-control'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="inpt-form-group">
+                                            <label for="lastName">{{ form_label(registrationForm.lastname) }}*</label>
+                                            <div class="inpt-group">
+                                                {{ form_widget(registrationForm.lastname, {'attr': {'class': 'inpt-control required'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pa-10 mb-3">
+                                    <div class="col-md-7">
+                                        <div class="inpt-form-group">
+                                            <label for="email">{{ form_label(registrationForm.email) }}*</label>
+                                            <div class="inpt-group">
+                                                {{ form_widget(registrationForm.email, {'attr': {'class': 'inpt-control required'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pa-10 mb-3">
+                                    <div class="col-md-7">
+                                        <div class="inpt-form-group">
+                                            <div class="inpt-group">
+                                                {{ form_widget(registrationForm.password, {'attr': {'class': 'inpt-control required'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pa-10 mb-3">
+                                    <div class="col-md-7">
+                                        <div class="inpt-form-group">
+                                            <div class="inpt-group">
+                                                {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'inpt-control required'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{ form_rest(registrationForm) }}
+                                <div class="mt-5 text-center">
+                                    <button type="submit" class="btn btn-sm btn-dark rounded-0 w-50 py-2">{{ 'register' | trans }}</button>
+                                </div>
+                                {{ form_end(registrationForm) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+<!--/ end: app-wrapper -->
+</body>
+</html>

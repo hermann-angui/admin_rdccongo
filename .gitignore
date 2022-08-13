@@ -1,0 +1,5 @@
+app/var
+db
+app/public/users
+app/vendor
+.idea

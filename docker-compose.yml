@@ -46,7 +46,7 @@ services:
       - APP_ENV=dev
       - MAILER_DSN=smtp://mailhog:1025
       - XDEBUG_MODES=debug
-      - DATABASE_URL=postgresql://root:QT6e5APtSYaU@localhost:5432/evisa_db?serverVersion=14
+      - DATABASE_URL=postgresql://root:QT6e5APtSYaU@nte.test.xo-dmp.com:5432/evisa_db?serverVersion=14
       - REMOTE_HOST=host.docker.internal
       - "host.docker.internal:host-gateway"
     volumes:

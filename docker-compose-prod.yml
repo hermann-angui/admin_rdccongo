@@ -19,8 +19,8 @@ services:
     networks:
       - evisa
 
-  nginx:
-    container_name: nginx
+  nginx_admin:
+    container_name: nginx_admin
     build:
       context: ./docker/nginx
     volumes:

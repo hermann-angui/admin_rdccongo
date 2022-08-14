@@ -7,7 +7,9 @@ use App\Helper\VisaHelper;
 use App\Repository\ApplicationRepository;
 use App\Repository\UserRepository;
 use App\Service\EVisaImageGenerator;
+use http\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,7 +43,11 @@ class VisaApplicationController extends AbstractController
     #[Route('/detail/{id}', name: 'app_visa_application_details', methods: ['GET'])]
     public function approve(Request $request, Application $application): Response
     {
-        return $this->render('visa_application/details.html.twig', ['application' => $application]);
+        $client = HttpClient::create();
+        $result = $client->request('POST','http://nte.test.xo-dmp.com:85/api/visa/attached_document/' . $application->getId());
+
+        $documents = json_decode($result->getContent());
+        return $this->render('visa_application/details.html.twig', ['application' => $application, "documents" => $documents]);
     }
 
 

@@ -6,120 +6,257 @@
 
 {% block main %}
     <section id="app-content">
-
         <div class="content-body">
-
             <div class="page-header">
                 <div class="box-layout">
                     <div class="col-xs-5 col-sm-6 col-md-5 va-m">
-                        <h3 class="pull-left">Application details</h3>
+                        <h3 class="pull-left">{{ application.firstname }} {{ application.middlename }} {{ application.lastname }}</h3>
                         <div class="col-xs-2 text-right pull-left">
                         </div>
                     </div>
                     <div class="col-xs-7 col-sm-6 col-md-7 va-m">
+                        <div class="toolbar text-right" id="toolbar">
+
+                            <div class="toolbar-bundle-buttons pull-left"></div>
+                            <div class="toolbar-form-buttons pull-right">
+                                <div class="btn-group toolbar-standard hidden-xs hidden-sm ">
+                                    <button type="button" class="btn btn-default btn-cancel btn-copy"
+                                            id="lead_buttons_cancel_toolbar">
+                                        <i class="fa fa-times text-danger "></i>
+                                        Annuler
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-save btn-copy"
+                                            id="lead_buttons_save_toolbar">
+                                        <i class="fa fa-save "></i>
+                                        Enregistrer &amp; fermer
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-apply btn-copy"
+                                            id="lead_buttons_apply_toolbar">
+                                        <i class="fa fa-check text-success "></i>
+                                        Appliquer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
                     </div>
 
                 </div>
             </div>
-            <div class="panel panel-default bdr-t-wdh-0 mb-0">
-                <div class="panel-body">
-                    <div class="box-layout">
-                        <div class="pull-right">
-                            <a href="{{ path('app_visa_application_approve', {id: application.id }) }}" class="btn btn-success" id="approve_btn">Approve</a>
-                            <a href="{{ path('app_visa_application_deny', {id: application.id }) }}" class="btn btn-success" id="approve_deny">Deny</a>
-                            <a href="{{ path('app_visa_application_needmore', {id: application.id }) }}" class="btn btn-success" id="approve_needmore">Need more infos</a>
+            <form novalidate="" autocomplete="false" data-toggle="ajax" role="form" method="post" action=""
+                  enctype="multipart/form-data"><!-- start: box layout -->
+                <div class="box-layout">
+                    <!-- step container -->
+                    <div class="col-md-3 bg-white height-auto">
+                        <div class="pr-lg pl-lg pt-md pb-md">
+                            <div class="media">
+                                <div class="media-body">
+                                    <img class="img-rounded img-bordered img-responsive media-object" src="{{ documents.photo_url }}" alt="">
+                                </div>
+                            </div>
+                            <div class="row mt-xs">
+                                <div class="col-sm-12" id="customAvatarContainer" style="display: none;">
+                                    <input type="file" id="lead_custom_avatar" name="" class="form-control" autocomplete="false">
+                                </div>
+                            </div>
+                            <hr>
+                            <ul class="list-group list-group-tabs">
+                                <li class="list-group-item active">
+                                    <a href="#perso" class="steps" data-toggle="tab">
+                                        Visa application infos
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#documents" class="steps" data-toggle="tab">
+                                        Documents
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#visa" class="steps" data-toggle="tab">
+                                        Visa
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
+                    <!--/ step container -->
 
-                <div class="page-list">
+                    <!-- container -->
+                    <div class="col-md-9 bg-auto height-auto bdr-l">
+                        <div class="tab-content">
+                            <!-- pane -->
+                            <div class="tab-pane fade bdr-rds-0 bdr-w-0 active in" id="perso">
+                                <div class="pa-md bg-auto bg-light-xs bdr-b">
+                                    <h4 class="fw-sb">
+                                        <span>Application number : </span>{{ application.applicationNumber }}</h4>
+                                    <span> status : <span
+                                                class="badge bg-success">{{ application.status }}</span></span>
+                                </div>
+                                <div class="pa-md">
+                                    <div class="form-group mb-0">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label class="control-label mb-xs">First Name</label>
+                                                <input type="text" id="first_name" name="first_name"
+                                                       class="form-control" data-encoding="first_name"
+                                                       placeholder="First name" autocomplete="false"
+                                                       value="{{ application.firstname }}">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label mb-xs">Middle Name</label>
+                                                <input type="text" id="Middle_name" name="first_name"
+                                                       class="form-control" data-encoding="middle_name"
+                                                       placeholder="Middle name" autocomplete="false"
+                                                       value="{{ application.middlename }}">
 
-                    <div class="table-responsive">
-                        <table class="table table-hover table-striped table-bordered email-list">
-                            <tr class="">
-                                <td><strong>Application N°</strong></td>
-                                <td>
-                                    <strong>{{ application.applicationNumber }}</strong>
-                                </td>
-                            </tr>
-                            <tr class="">
-                                <td>Status</td>
-                                <td><span class="badge bg-success">{{ application.status }}</span></td>
-                            </tr>
-                            <tr class="">
-                                <td>Photo</td>
-                                <td>{{ application.photo }}</td>
-                            </tr>
-                            <tr class="">
-                                <td>First Name</td>
-                                <td>{{ application.firstName }}</td>
-                            </tr>
-                            <tr class="">
-                                <td>Middle Name</td>
-                                <td>{{ application.MiddleName }}</td>
-                            </tr>
-                            <tr class="">
-                                <td>Sex</td>
-                                <td>{{ application.gender }}</td>
-                            </tr>
-                            <tr class="">
-                                <td>Date of birth</td>
-                                <td>{{ application.dateOfBirth }}</td>
-                            </tr>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label mb-xs">LastName</label>
+                                                <input type="text" id="last_name" name="last_name" class="form-control"
+                                                       data-encoding="last_name" placeholder="Last name"
+                                                       autocomplete="false" value="{{ application.lastname }}">
+                                            </div>
+                                        </div>
+                                        <hr class="mnr-md mnl-md">
+                                    </div>
 
-                            <tr class="">
-                                <td>Marital status</td>
-                                <td>{{ application.maritalStatus }}</td>
-                            </tr>
-                            <tr class="">
-                                <td>country Of Residence</td>
-                                <td>{{ application.CountryOfResidence }}</td>
-                            </tr>
-
-                            <tr class="">
-                                <td>Country of Birth</td>
-                                <td>{{ application.CountryOfBirth }}</td>
-                            </tr>
-
-                            <tr class="">
-                                <td>CurrentNationality</td>
-                                <td>{{ application.CurrentNationality }}</td>
-                            </tr>
-                            <tr class="">
-                                <td>Current Nationality Acquired By</td>
-                                <td>{{ application.CurrentNationalityAcquiredBy }}</td>
-                            </tr>
-                            <tr class="">
-                                <td>Passport</td>
-                                <td>{{ application.passportScan }}</td>
-                            </tr>
-
-                            <tr class="">
-                                <td>Invitation Letter</td>
-                                <td>{{ application.invitationLetterScan }}</td>
-                            </tr>
-
-                            <tr class="">
-                                <td>Hotel Reservation</td>
-                                <td>{{ application.hotelReservationScan }}</td>
-                            </tr>
-                            <tr class="">
-                                <td>Flight Ticket </td>
-                                <td>{{ application.flightTicketScan }}</td>
-                            </tr>
-                            <tr class="">
-                                <td>Profession </td>
-                                <td>{{ application.profession }}</td>
-                            </tr>
-                        </table>
+                                    <div class="form-group mb-0">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label mb-xs">Sex</label>
+                                                <input type="text" id="gender" name="gender" class="form-control"
+                                                       placeholder="Gender" autocomplete="false"
+                                                       value="{{ application.gender }}">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="control-label mb-xs">Marital Status</label>
+                                                <input type="text" id="marital_status" name="gender"
+                                                       class="form-control" placeholder="marital_status"
+                                                       autocomplete="false" value="{{ application.maritalStatus }}">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="control-label mb-xs">Purpose Of Travel</label>
+                                                <input type="text" id="purpose_of_travel" name="purpose_of_travel"
+                                                       class="form-control" placeholder="Purpose of travel"
+                                                       autocomplete="false" value="{{ application.purposeOfTravel }}">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="control-label mb-xs">Profession</label>
+                                                <input type="text" id="profession" name="profession"
+                                                       class="form-control" placeholder="profession"
+                                                       autocomplete="false" value="{{ application.profession }}">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label class="control-label mb-xs">passport_type</label>
+                                                <input type="text" id="passport_type" name="passport_type"
+                                                       class="form-control" placeholder="passport_type"
+                                                       autocomplete="false" value="{{ application.passportType }}">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label mb-xs">Passport Issue Date</label>
+                                                <input type="text" id="passport_issuedate" name="passport_issuedate"
+                                                       class="form-control" placeholder="Issue Date"
+                                                       autocomplete="false"
+                                                       value="{{ application.passportIssueDate | date }}">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label mb-xs">Passport Valid until</label>
+                                                <input type="text" id="passport_expirydate" name="passport_expirydate"
+                                                       class="form-control" placeholder="Valid until"
+                                                       autocomplete="false"
+                                                       value="{{ application.passportExpiryDate | date }}">
+                                            </div>
+                                        </div>
+                                        <hr class="mnr-md mnl-md">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade bdr-rds-0 bdr-w-0" id="documents">
+                                <div class="pa-md bg-auto bg-light-xs bdr-b">
+                                    <h4 class="fw-sb">
+                                        <span>Application number : </span>{{ application.applicationNumber }}</h4>
+                                    <span> status : <span
+                                                class="badge bg-success">{{ application.status }}</span></span>
+                                </div>
+                                <div class="pa-md">
+                                    <div class="form-group mb-0">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="control-label mb-xs">Passport scan</label>
+                                                <img class="img-rounded img-bordered img-responsive media-object"
+                                                     src="{{ documents.passport_scan }}" alt="">
+                                            </div>
+                                        </div>
+                                        <hr class="mnr-md mnl-md">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="control-label mb-xs">Invitation/Hotel reservation
+                                                    scan</label>
+                                                <img class="img-rounded img-bordered img-responsive media-object"
+                                                     src="{{ documents.invitation_letter_scan }}" alt="">
+                                            </div>
+                                        </div>
+                                        <hr class="mnr-md mnl-md">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <img class="img-rounded img-bordered img-responsive media-object"
+                                                     src="{{ documents.hotel_reservation_scan }}" alt="">
+                                            </div>
+                                        </div>
+                                        <hr class="mnr-md mnl-md">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="control-label mb-xs">Flight ticket scan</label>
+                                                <img class="img-rounded img-bordered img-responsive media-object"
+                                                     src="{{ documents.flight_ticket_scan }}" alt="">
+                                            </div>
+                                        </div>
+                                        <hr class="mnr-md mnl-md">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade bdr-rds-0 bdr-w-0" id="visa">
+                                <div class="pa-md bg-auto bg-light-xs bdr-b">
+                                    <h4 class="fw-sb">
+                                        <span>Application number : </span>{{ application.applicationNumber }}</h4>
+                                    <span> status : <span
+                                                class="badge bg-success">{{ application.status }}</span></span>
+                                </div>
+                                <div class="pa-md">
+                                    <div class="form-group mb-0">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <img class="img-rounded img-bordered img-responsive media-object"
+                                                     src="{{ documents.visa }}" alt="">
+                                            </div>
+                                        </div>
+                                        <hr class="mnr-md mnl-md">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/ #pane -->
                     </div>
-                    <div class="panel-footer">
-
-                    </div>
                 </div>
-            </div>
-
+                <!--/ end: container -->
+            </form>
         </div>
-
+        <div class="bottom-form-buttons hide">
+            <a href="http://nte.test.xo-dmp.com:85/api/visa/needmore/{{ application.id }}" class="btn btn-default btn-apply">
+                <i class="fa fa-watch"></i>
+                Need more info
+            </a>
+            <a href="http://nte.test.xo-dmp.com:85/api/visa/approve/{{ application.id }}" class="btn btn-default btn-apply">
+                <i class="fa fa-check text-success"></i>
+                Approve
+            </a>
+            <a href="http://nte.test.xo-dmp.com:85/api/visa/deny/{{ application.id }}" class="btn btn-default btn-apply">
+                <i class="fa fa-times text-danger "></i>
+                Deny
+            </a>
+        </div>
     </section>
 {% endblock %}

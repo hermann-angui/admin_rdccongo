@@ -10,7 +10,7 @@ services:
     build:
       context: ./docker
     environment:
-      - APP_ENV=prod
+      - APP_ENV=dev
       - DATABASE_URL=postgresql://root:QT6e5APtSYaU@nte.test.xo-dmp.com:5432/evisa_db?serverVersion=14
       - REMOTE_HOST=host.docker.internal
       - "host.docker.internal:host-gateway"

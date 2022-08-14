@@ -20,15 +20,15 @@
                             <div class="toolbar-bundle-buttons pull-left"></div>
                             <div class="toolbar-form-buttons pull-right">
                                 <div class="btn-group toolbar-standard hidden-xs hidden-sm ">
-                                    <a href="http://nte.test.xo-dmp.com:85/api/visa/needmore/{{ application.id }}" class="btn btn-default btn-apply">
+                                    <a href="http://nte.test.xo-dmp.com:85/visa/needmore/{{ application.id }}" class="btn btn-default btn-apply">
                                         <i class="fa fa-watch"></i>
                                         Need more info
                                     </a>
-                                    <a href="http://nte.test.xo-dmp.com:85/api/visa/approve/{{ application.id }}" class="btn btn-default btn-apply">
+                                    <a href="http://nte.test.xo-dmp.com:85/visa/approve/{{ application.id }}" class="btn btn-default btn-apply">
                                         <i class="fa fa-check text-success"></i>
                                         Approve
                                     </a>
-                                    <a href="http://nte.test.xo-dmp.com:85/api/visa/deny/{{ application.id }}" class="btn btn-default btn-apply">
+                                    <a href="http://nte.test.xo-dmp.com:85/visa/deny/{{ application.id }}" class="btn btn-default btn-apply">
                                         <i class="fa fa-times text-danger "></i>
                                         Deny
                                     </a>
@@ -243,24 +243,6 @@
                 </div>
                 <!--/ end: container -->
             </form>
-        </div>
-        <div class="bottom-form-buttons hide">
-            <a href="http://nte.test.xo-dmp.com:85/api/visa/needmore/{{ application.id }}" class="btn btn-default btn-apply">
-                <i class="fa fa-watch"></i>
-                Need more info
-            </a>
-            <a href="http://nte.test.xo-dmp.com:85/api/visa/approve/{{ application.id }}" class="btn btn-default btn-apply">
-                <i class="fa fa-check text-success"></i>
-                Approve
-            </a>
-            <a href="http://nte.test.xo-dmp.com:85/api/visa/deny/{{ application.id }}" class="btn btn-default btn-apply">
-                <i class="fa fa-times text-danger "></i>
-                Deny
-            </a>
-            <a href="http://nte.test.xo-dmp.com:85/api/evisa/generate/{{ application.id }}" class="btn btn-default btn-apply">
-                <i class="fa fa-eye text-warning"></i>
-                Generate Visa
-            </a>
         </div>
     </section>
 {% endblock %}

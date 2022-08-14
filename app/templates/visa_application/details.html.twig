@@ -20,28 +20,23 @@
                             <div class="toolbar-bundle-buttons pull-left"></div>
                             <div class="toolbar-form-buttons pull-right">
                                 <div class="btn-group toolbar-standard hidden-xs hidden-sm ">
-                                    <button type="button" class="btn btn-default btn-cancel btn-copy"
-                                            id="lead_buttons_cancel_toolbar">
+                                    <a href="http://nte.test.xo-dmp.com:85/api/visa/needmore/{{ application.id }}" class="btn btn-default btn-apply">
+                                        <i class="fa fa-watch"></i>
+                                        Need more info
+                                    </a>
+                                    <a href="http://nte.test.xo-dmp.com:85/api/visa/approve/{{ application.id }}" class="btn btn-default btn-apply">
+                                        <i class="fa fa-check text-success"></i>
+                                        Approve
+                                    </a>
+                                    <a href="http://nte.test.xo-dmp.com:85/api/visa/deny/{{ application.id }}" class="btn btn-default btn-apply">
                                         <i class="fa fa-times text-danger "></i>
-                                        Annuler
-                                    </button>
-                                    <button type="button" class="btn btn-default btn-save btn-copy"
-                                            id="lead_buttons_save_toolbar">
-                                        <i class="fa fa-save "></i>
-                                        Enregistrer &amp; fermer
-                                    </button>
-                                    <button type="button" class="btn btn-default btn-apply btn-copy"
-                                            id="lead_buttons_apply_toolbar">
-                                        <i class="fa fa-check text-success "></i>
-                                        Appliquer
-                                    </button>
+                                        Deny
+                                    </a>
                                 </div>
                             </div>
                         </div>
                         <div class="clearfix"></div>
-
                     </div>
-
                 </div>
             </div>
             <form novalidate="" autocomplete="false" data-toggle="ajax" role="form" method="post" action=""
@@ -148,6 +143,7 @@
                                                        autocomplete="false" value="{{ application.profession }}">
                                             </div>
                                         </div>
+                                        <hr class="mnr-md mnl-md">
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <label class="control-label mb-xs">passport_type</label>
@@ -256,6 +252,10 @@
             <a href="http://nte.test.xo-dmp.com:85/api/visa/deny/{{ application.id }}" class="btn btn-default btn-apply">
                 <i class="fa fa-times text-danger "></i>
                 Deny
+            </a>
+            <a href="http://nte.test.xo-dmp.com:85/api/evisa/generate/{{ application.id }}" class="btn btn-default btn-apply">
+                <i class="fa fa-eye text-warning"></i>
+                Generate Visa
             </a>
         </div>
     </section>

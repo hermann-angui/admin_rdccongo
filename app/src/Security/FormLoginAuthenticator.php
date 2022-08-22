@@ -33,7 +33,6 @@ class FormLoginAuthenticator extends AbstractLoginFormAuthenticator
         $all = $request->request->all();
         $username = $all['login_form']['email'] ; // $request->request->get('email', '');
         $password = $all['login_form']['password'] ; // $request->request->get('password', '');
-        $csrf_token = $all['login_form']['_token'] ; //  $request->request->get('_csrf_token')
         $csrf_token = $all['_csrf_token'] ; //  $request->request->get('_csrf_token')
 
         $request->getSession()->set(Security::LAST_USERNAME, $username);

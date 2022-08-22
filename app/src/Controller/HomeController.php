@@ -21,11 +21,6 @@ class HomeController extends AbstractController
         return $this->render('home/aboutus.html.twig');
     }
 
-    #[Route(path: '/config', name: 'app_config')]
-    public function config(Request $request): Response
-    {
-        return $this->render('home/config.html.twig');
-    }
     #[Route(path: '/language/{lang}', name: 'app_change_language')]
     public function changeLanguage($lang): Response
     {

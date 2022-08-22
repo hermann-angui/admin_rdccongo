@@ -5,13 +5,13 @@ namespace App\Form;
 use App\Entity\Application;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Intl\Countries;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
@@ -19,6 +19,8 @@ class ApplicationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
+        $countries = array_combine(array_values(Countries::getNames()), array_values(Countries::getNames()));
         $builder
             /* PERSONAL INFO */
             ->add('firstname',TextType::class, [
@@ -42,11 +44,11 @@ class ApplicationFormType extends AbstractType
                 'expanded' => true,
                 'multiple' => false,
                 'choices' => [
-                    'Male' => 'Male',
-                    'Female' => 'Female',
+                    'Male' => 'M',
+                    'Female' => 'F',
                 ],
-                'empty_data' => 'Male',
-                'data' => 'Male',
+                'empty_data' => 'M',
+                'data' => 'M',
             ])
             ->add('marital_status', ChoiceType::class, [
                 'label' => "Marital status",
@@ -62,16 +64,17 @@ class ApplicationFormType extends AbstractType
                     'Divorced' => 'Divorced',
                     'Separated' => 'Separated',
                 ],
-                'empty_data' => '',
-                'data' => '',
+                'empty_data' => 'Single',
+                'data' => 'Single',
             ])
             ->add('place_of_birth', TextType::class, [
                 'label' => 'Place of birth',
                 'mapped' => true
             ])
-            ->add('country_of_residence', TextType::class, [
+            ->add('country_of_residence', ChoiceType::class, [
                 'label' => 'Country of residence',
-                'mapped' => true
+                'mapped' => true,
+                'choices' => $countries
             ])
             ->add('profession', TextType::class, [
                 'label' => 'Profession',
@@ -84,11 +87,13 @@ class ApplicationFormType extends AbstractType
                 'format' => 'dd-mm-yyyy',
                 'html5' => false
             ])
-            ->add('country_of_birth', CountryType::class, [
-                'mapped' => false,
+            ->add('country_of_birth', ChoiceType::class, [
+                'mapped' => true,
+                'choices' => $countries
             ])
-            ->add('current_nationality', CountryType::class, [
-                'mapped' => false,
+            ->add('current_nationality', ChoiceType::class, [
+                'mapped' => true,
+                'choices' => $countries
             ])
             ->add('current_nationality_acquired_by', ChoiceType::class, [
                 'mapped' => false,
@@ -108,7 +113,8 @@ class ApplicationFormType extends AbstractType
                         'mimeTypes' => [
                             'application/pdf',
                             'application/x-pdf',
-                            'image/*',
+                            'image/jpeg',
+                            'image/png'
                         ],
                         'mimeTypesMessage' => 'Please upload a valid PDF or Image document',
                     ])
@@ -124,7 +130,8 @@ class ApplicationFormType extends AbstractType
                         'mimeTypes' => [
                             'application/pdf',
                             'application/x-pdf',
-                            'image/*',
+                            'image/jpeg',
+                            'image/png'
                         ],
                         'mimeTypesMessage' => 'Please upload a valid PDF or Image document',
                     ])
@@ -156,7 +163,8 @@ class ApplicationFormType extends AbstractType
                         'mimeTypes' => [
                             'application/pdf',
                             'application/x-pdf',
-                            'image/*',
+                            'image/jpeg',
+                            'image/png'
                         ],
                         'mimeTypesMessage' => 'Please upload a valid PDF or Image document',
                     ])
@@ -178,7 +186,8 @@ class ApplicationFormType extends AbstractType
                         'mimeTypes' => [
                             'application/pdf',
                             'application/x-pdf',
-                            'image/*',
+                            'image/jpeg',
+                            'image/png'
                         ],
                         'mimeTypesMessage' => 'Please upload a valid PDF or Image document',
                     ])
@@ -201,6 +210,8 @@ class ApplicationFormType extends AbstractType
                     'Sport Organization' => 'Sport Organization',
                     'Clergyman' => 'Clergyman',
                 ],
+                'empty_data' => 'Tourism',
+                'data' => 'Tourism'
             ])
 
             /* TRANSIT */
@@ -240,6 +251,8 @@ class ApplicationFormType extends AbstractType
                     'Multiple' => 'Multiple',
                     'Transit' => 'Transit',
                 ],
+                'empty_data' => 'Single',
+                'data' => 'Single'
             ])
             ->add('first_entry_place', TextType::class, [
                 'mapped' => true,
@@ -247,7 +260,7 @@ class ApplicationFormType extends AbstractType
             ])
             ->add('first_entry_date', DateType::class, [
                 'mapped' => true,
-                'label' => 'Entry place',
+                'label' => 'Departure date',
                 'widget' => 'single_text',
                 'format' => 'dd-mm-yyyy',
                 'html5' => false
@@ -265,11 +278,11 @@ class ApplicationFormType extends AbstractType
             ])
             ->add('last_entry_place', TextType::class, [
                 'mapped' => true,
-                'label' => 'Entry date',
+                'label' => 'Entry place',
             ])
             ->add('last_entry_date', DateType::class, [
                 'mapped' => true,
-                'label' => 'Entry place',
+                'label' => 'Departure date',
                 'widget' => 'single_text',
                 'format' => 'dd-mm-yyyy',
                 'html5' => false
@@ -309,9 +322,10 @@ class ApplicationFormType extends AbstractType
                 'mapped' => true,
                 'label' => "Father's last name",
             ])
-            ->add('father_nationality', CountryType::class,[
+            ->add('father_nationality', ChoiceType::class,[
                 'mapped' => true,
                 'label' => "Father's nationality",
+                'choices' => $countries
             ])
             ->add('father_date_of_birth', DateType::class,[
                 'mapped' => true,
@@ -330,9 +344,10 @@ class ApplicationFormType extends AbstractType
                 'mapped' => true,
                 'label' => "Mother's last name",
             ])
-            ->add('mother_nationality', CountryType::class,[
+            ->add('mother_nationality', ChoiceType::class,[
                 'mapped' => true,
                 'label' => "Mother's nationality",
+                'choices' => $countries
             ])
             ->add('mother_date_of_birth', DateType::class, [
                 'mapped' => true,
@@ -354,6 +369,7 @@ class ApplicationFormType extends AbstractType
 //            ->add('spouse_nationality', CountryType::class, [
 //                'mapped' => true,
 //                'label' => "Spouse's nationality",
+//                'choices' => array_flip($countries)
 //            ])
 //            ->add('spouse_date_of_birth', DateType::class, [
 //                'mapped' => true,
@@ -370,9 +386,12 @@ class ApplicationFormType extends AbstractType
                 'choices'  => [
                     'Ordinary' => 'Ordinary',
                     'Business' => 'Business',
+                    'Diplomatic' => 'Diplomatic',
                     'Service' => 'Service',
                     'Other' => 'Other',
                 ],
+                'empty_data' => 'Ordinary',
+                'data' => 'Ordinary'
             ])
             ->add('passport_number', TextType::class, [
                 'label' => 'Passport number',

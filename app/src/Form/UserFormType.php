@@ -46,16 +46,17 @@ class UserFormType extends AbstractType
             ])
             ->add('firstname',TextType::class)
             ->add('lastname',TextType::class)
+            ->add('maiden_name',TextType::class)
             ->add('middlename',TextType::class)
             ->add('sex', ChoiceType::class, [
                 'expanded' => true,
                 'multiple' => false,
                 'choices' => [
-                    'Male' => 'Male',
-                    'Female' => 'Female',
+                    'monsieur' => 'Homme',
+                    'madame' => 'Femme',
                 ],
-                'empty_data' => 'Male',
-                'data' => 'Male',
+                'empty_data' => 'Homme',
+                'data' => 'Homme',
             ])
             ->add('place_of_birth', TextType::class)
             ->add('date_of_birth', DateType::class)

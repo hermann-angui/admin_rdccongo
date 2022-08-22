@@ -3,15 +3,24 @@
 namespace App\Helper;
 
 use App\Entity\Application;
-use TCPDF2DBarcode;
+use App\Service\EVisaImageGenerator;
 
 class VisaHelper
 {
-    protected string $rootDir;
+    /**
+     * @param UserHelper $userHelper
+     */
+    protected UserHelper $userHelper;
 
-    public function __construct(string $rootDir)
+    /**
+     * @var EVisaImageGenerator
+     */
+    protected EVisaImageGenerator $eVisaImageGenerator;
+
+    public function __construct(UserHelper $userHelper, EVisaImageGenerator $eVisaImageGenerator)
     {
-        $this->rootDir = $rootDir;
+        $this->userHelper = $userHelper;
+        $this->eVisaImageGenerator = $eVisaImageGenerator;
     }
 
     public function mapApplicationToVisa(?Application $application): ?array
@@ -23,7 +32,7 @@ class VisaHelper
         $visaParams["given_name"] =  $application->getMiddleName() . $application->getLastName();
         $visaParams["sex"] =  $application->getGender();;
         $visaParams["passport_number"] =  $application->getPassportNumber();
-        $visaParams["document_number"] =  'R' . rand(101112,999999);
+        $visaParams["document_number"] =  sprintf("R%09d", $application->getId());
 
         $from_date = new \DateTime();
         $to_date = $from_date->add(new \DateInterval('P1M'));
@@ -32,36 +41,31 @@ class VisaHelper
         $visaParams["date_of_birth"] =  $application->getDateOfBirth()?->format('d/m/Y');
         $visaParams["nationality"] =  $application->getCurrentNationality();
 
-        // $visaParams["photo"] =  $this->rootDir . '/public/media/user/photos/' . $application->getPhoto();
-       // $visaParams["photo"] =  'https://rdcongo-visa.herokuapp.com/media/user/photos/' . $application->getPhoto();
-        //$visaParams["evisa_bg"] = $this->rootDir . '/public/media/images/evisa_bg.jpg';
-        $visaParams["photo"] =  'https://rdcongo-visa.herokuapp.com/users/photos/' . $application->getPhoto();
-        $visaParams["evisa_bg"] = "https://admin-rdcvisa.herokuapp.com/media/images/evisa_bg.jpg";
+        $visaParams["userDir"] =  $this->userHelper->getUserUploadDirectory($application->getApplicant());
+        $visaParams["photo"] = $this->userHelper->getUserUploadDirectory($application->getApplicant()) . $application->getPhoto();
+        //$visaParams["evisa"] = $this->userHelper->getPublicDirectory() . 'assets/images/evisabg.jpg';
+        //$visaParams["watermark"] =  $this->userHelper->getPublicDirectory() . "assets/images/evisawatermark.png";
 
-        $visaParams["long_number"] = 'V<<<RDC';
+        $visaParams["evisa"] = '/var/www/html/public/assets/images/evisabg.jpg';
+        $visaParams["watermark"] = '/var/www/html/public/assets/images/evisawatermark.png';
+
+        $visaParams["long_number"] = 'V<<<RDC<<<';
         $visaParams["long_number"] .= $visaParams['surname'] . '<<<<<';
         $visaParams["long_number"] .= $visaParams['given_name'] . '<<<<';
-        $visaParams["long_number"] .= $visaParams['document_number'] . '<<<<<<<<< ';
+        $visaParams["long_number"] .= $visaParams['document_number'] . '<<<<<<<<<N ';
 
         $visaParams["long_number"] .= $visaParams['nationality'];
         $visaParams["long_number"] .= strrev(str_ireplace('/','',$visaParams['date_of_birth'])) . '5M';
         $visaParams["long_number"] .= strrev(str_ireplace('/','', $visaParams['valid_until']));
         $visaParams["long_number"] .= rand(145685815252,999998459847);
 
-        $visaParams['barcode'] = $this->generateBarCode($visaParams["document_number"]);
          return $visaParams;
     }
 
-    function generateBarCode($name)
+    public function generate(?Application $application)
     {
-        $barcodeobj = new TCPDF2DBarcode($name,  "PDF417");
-        $barcode = $barcodeobj->getBarcodePngData(250,60);
-
-        $barcodeDirectory = $this->rootDir . "/var/tmp";
-        if(!file_exists($barcodeDirectory)) mkdir($barcodeDirectory);
-        $tmp_barcode_file = $barcodeDirectory . '/barcode_' . $name. '.png';
-        file_put_contents($tmp_barcode_file, $barcode);
-        return $tmp_barcode_file;
+        $userData = $this->mapApplicationToVisa($application);
+        return  $this->eVisaImageGenerator->generate($userData);
     }
 
 }

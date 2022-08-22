@@ -5,7 +5,7 @@ namespace App\Entity;
 use App\Repository\VisaRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: VisaRepository::class, readOnly: true)]
+#[ORM\Entity(repositoryClass: VisaRepository::class)]
 class Visa
 {
     #[ORM\Id]

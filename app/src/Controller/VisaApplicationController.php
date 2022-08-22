@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Application;
 use App\Helper\VisaHelper;
+use App\Helper\VisaHttpClient;
 use App\Repository\ApplicationRepository;
 use App\Repository\UserRepository;
 use App\Service\EVisaImageGenerator;
@@ -20,14 +21,14 @@ class VisaApplicationController extends AbstractController
     protected UserRepository $userRepository;
     protected ApplicationRepository $applicationRepository;
     protected EVisaImageGenerator $eVisaImageGenerator;
-    protected VisaHelper $visaHelper;
+    protected VisaHttpClient $visaHttpClient;
 
     public function __construct(UserRepository $userRepository,
                                 ApplicationRepository $applicationRepository,
-                                VisaHelper $visaHelper,
+                                VisaHttpClient $visaHttpClient,
                                 EVisaImageGenerator $eVisaImageGenerator)
     {
-        $this->visaHelper = $visaHelper;
+        $this->visaHttpClient = $visaHttpClient;
         $this->userRepository = $userRepository;
         $this->applicationRepository = $applicationRepository;
         $this->eVisaImageGenerator = $eVisaImageGenerator;
@@ -43,41 +44,16 @@ class VisaApplicationController extends AbstractController
     #[Route('/detail/{id}', name: 'app_visa_application_details', methods: ['GET'])]
     public function approve(Request $request, Application $application): Response
     {
-        $client = HttpClient::create();
-        $result = $client->request('POST','http://nte.test.xo-dmp.com:85/api/visa/attached_document/' . $application->getId());
-
-        $documents = json_decode($result->getContent());
+        $documents = $this->visaHttpClient->getApplicationById($application->getId());
         return $this->render('visa_application/details.html.twig', ['application' => $application, "documents" => $documents]);
     }
 
 
-    #[Route('/approve/{id}', name: 'app_visa_application_approve', methods: ['GET'])]
-    public function changeStatus(Request $request, Application $application): Response
+    #[Route('/generate/{id}', name: 'app_visa_application_generate', methods: ['GET'])]
+    public function generate(Request $request, Application $application): Response
     {
-        $application->setStatus('APPROVED');
-        $this->applicationRepository->add($application, true);
-
-        return $this->redirectToRoute('app_visa_application_details', ['id' => $application->getId()]);
-    }
-
-    #[Route('/deny/{id}', name: 'app_visa_application_deny', methods: ['GET'])]
-    public function denyStatus(Request $request, Application $application): Response
-    {
-        $status = $request->query->get('DENIED');
-
-        $application->setStatus($status);
-        $this->applicationRepository->add($application, true);
-
-        return $this->redirectToRoute('app_visa_application_details', ['id' => $application->getId()]);
-    }
-
-    #[Route('/needmore/{id}', name: 'app_visa_application_needmore', methods: ['GET'])]
-    public function needMoreStatus(Request $request, Application $application): Response
-    {
-        $application->setStatus('NEED_MORE_INFO');
-        $this->applicationRepository->add($application, true);
-
-        return $this->redirectToRoute('app_visa_application_details', ['id' => $application->getId()]);
+        $documents = $this->visaHttpClient->getApplicationById($application->getId());
+        return $this->render('visa_application/generate.html.twig', ['application' => $application, "documents" => $documents]);
     }
 
     #[Route('/display_visa/{id}', name: 'app_visa_application_display', methods: ['GET'])]

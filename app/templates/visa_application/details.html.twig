@@ -3,6 +3,16 @@
 {% block title %}
     visa applications
 {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        function generateVisa(id) {
+            $.get('http://nte.test.xo-dmp.com:85/api/application/' + id, function(data){
+                window.reload();
+            });
+        }
+    </script>
+{% endblock %}
 
 {% block main %}
     <section id="app-content">
@@ -32,7 +42,7 @@
                                         <i class="fa fa-times text-danger "></i>
                                         Deny
                                     </a>
-                                    <a href="http://nte.test.xo-dmp.com:85/api/evisa/generate/{{ application.id }}" class="btn btn-default btn-apply">
+                                    <a href="javascript:generateVisa({{ application.id }})" class="btn btn-default btn-apply">
                                         <i class="fa fa-eye text-warning"></i>
                                         Generate Visa
                                     </a>
@@ -228,9 +238,9 @@
                                 <div class="pa-md">
                                     <div class="form-group mb-0">
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-12">
                                                 <img class="img-rounded img-bordered img-responsive media-object"
-                                                     src="{{ documents.visa }}" alt="">
+                                                     src="{{ documents.visa }}" alt="" width="90%" height="100">
                                             </div>
                                         </div>
                                         <hr class="mnr-md mnl-md">

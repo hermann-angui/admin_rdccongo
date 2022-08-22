@@ -6,7 +6,6 @@ use App\DTO\LoginDto;
 use App\Entity\User;
 use App\Form\LoginFormType;
 use App\Form\RegistrationFormType;
-use App\Form\UserFormType;
 use App\Security\FormLoginAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,8 +26,8 @@ class SecurityController extends AbstractController
              return $this->redirectToRoute('app_home');
          }
 
-        $user = new User();
-        $form = $this->createForm(LoginFormType::class, $user);
+        $loginDto = new LoginDto();
+        $form = $this->createForm(LoginFormType::class, $loginDto);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

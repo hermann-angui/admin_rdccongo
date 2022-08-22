@@ -3,196 +3,253 @@
 namespace App\Entity;
 
 use App\Repository\ApplicationRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ApplicationRepository::class)]
 class Application
 {
     #[ORM\Id]
+    #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['application'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $first_name;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $last_name;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $middle_name;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $gender;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $marital_status;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $country_of_residence;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $place_of_birth;
 
     #[ORM\Column(type: 'datetime', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $date_of_birth;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $country_of_birth;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $current_nationality;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $current_nationality_acquired_by;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $photo;
 
-
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $passport_scan;
 
-
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $invitation_letter_scan;
 
-
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $hotel_reservation_scan;
 
-
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $flight_ticket_scan;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $passport_number;
 
     #[ORM\Column(type: 'datetime', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $father_date_of_birth;
 
     #[ORM\Column(type: 'datetime', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $mother_date_of_birth;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $spouse_firstname;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $spouse_lastname;
 
     #[ORM\Column(type: 'datetime', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $spouse_date_of_birth;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     #[ORM\GeneratedValue]
     private $application_number;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['application'])]
     private $transit_depart_from;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['application'])]
     private $transit_depart_to;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['application'])]
     private $transit_return_from;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['application'])]
     private $transit_return_to;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $visa_type;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['application'])]
     private $first_entry_date;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['application'])]
     private $first_entry_place;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['application'])]
     private $first_returning_date;
 
     #[ORM\Column(type: 'string', nullable: true)]
+    #[Groups(['application'])]
     private $first_returning_place;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['application'])]
     private $last_entry_date;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['application'])]
     private $last_entry_place;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['application'])]
     private $last_returning_date;
 
     #[ORM\Column(type: 'string', nullable: true)]
+    #[Groups(['application'])]
     private $last_returning_place;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $sponsorship_fullname;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $sponsorship_address;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $sponsorship_phonenumber;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $sponsorship_garantee;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $profession;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $father_firstname;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $father_lastname;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $father_nationality;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $mother_firstname;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $mother_lastname;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $mother_nationality;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $passport_type;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['application'])]
     private $passport_issuedate;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['application'])]
     private $passport_expirydate;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $passport_issueby;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $residency_cardnumber;
 
     #[ORM\Column(type: 'datetime', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $residency_expirationdate;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $purpose_of_travel;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $spouse_name;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $spouse_nationality;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $phone_number;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $address;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['application'])]
     private $status;
 
     #[ORM\ManyToOne(inversedBy: 'applications')]
@@ -200,9 +257,11 @@ class Application
     private ?User $applicant = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['application'])]
     private $application_date = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['application'])]
     private $date_created = null;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'parent_application')]
@@ -210,6 +269,8 @@ class Application
 
     public function __construct()
     {
+        $this->date_created = new \DateTime();
+        $this->application_date = new \DateTime();
     }
 
     public function getId(): ?int
@@ -346,7 +407,7 @@ class Application
     /**
      * @return mixed
      */
-    public function getDateOfBirth() : ?\DateTime
+    public function getDateOfBirth()
     {
         return $this->date_of_birth;
     }
@@ -355,7 +416,7 @@ class Application
      * @param mixed $date_of_birth
      * @return Application
      */
-    public function setDateOfBirth(?\DateTime $date_of_birth): self
+    public function setDateOfBirth($date_of_birth)
     {
         $this->date_of_birth = $date_of_birth;
         return $this;
@@ -451,6 +512,7 @@ class Application
         return $this;
     }
 
+
     /**
      * @return mixed
      */
@@ -468,8 +530,6 @@ class Application
         $this->invitation_letter_scan = $invitation_letter_scan;
         return $this;
     }
-
-
     /**
      * @return mixed
      */
@@ -487,7 +547,6 @@ class Application
         $this->hotel_reservation_scan = $hotel_reservation_scan;
         return $this;
     }
-
 
     /**
      * @return mixed

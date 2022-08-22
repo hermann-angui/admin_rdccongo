@@ -2,45 +2,34 @@
 
 namespace App\Service;
 
-
-use Knp\Bundle\SnappyBundle\Snappy\Response\JpegResponse;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use TCPDF2DBarcode;
 
 class EVisaImageGenerator extends ImageRenderer
 {
-    public function render($userData)
-    {
-        $fileName = '/var/www/html/var/tmp/' . $userData['document_number'] . '.jpg';
-        $html = $this->twig->render('evisa/print.html.twig', ['user'=> $userData ]);
-        if(file_exists($userData['barcode'])) unlink($userData['barcode']);
-
-        return new JpegResponse($this->snappy->getOutputFromHtml($html), $fileName);
-    }
-
     public function generate($userData)
     {
-        $fileName = $userData['document_number'] . '.jpg';
+        $visa_file = $userData['userDir'] .  $userData['document_number'] . '_visa.jpg';
+        $userData['barcode'] = $this->generateBarCode($userData);
+
         $html = $this->twig->render('evisa/print.html.twig', ['user'=> $userData]);
         $output = $this->snappy->getOutputFromHtml($html);
 
-        return new JpegResponse(
-            $output,
-            $fileName,
-            'image/jpg',
-            ResponseHeaderBag::DISPOSITION_ATTACHMENT
-        );
+        file_put_contents($visa_file, $output);
+
+        return $visa_file;
     }
 
-    public function ajaxGenerate($userData)
+    public function generateBarCode($userData)
     {
-        $fileName = $userData['document_number'] . '.jpg';
-        $html = $this->twig->render('evisa/print.html.twig', ['user'=> $userData]);
-        $output = $this->snappy->getOutputFromHtml($html);
+        $barcode_file = $userData['userDir'] .  $userData['document_number'] . '_barcode.jpg';
 
-        if(file_exists($userData['barcode'])) unlink($userData['barcode']);
+        if(!file_exists($userData['userDir'])) mkdir($userData['userDir']);
 
-        return [$output, $fileName, 'image/jpg'];
+        if(!file_exists($barcode_file)) {
+            $barcodeobj = new TCPDF2DBarcode($userData['document_number'],  "PDF417");
+            $barcode = $barcodeobj->getBarcodePngData(300,60);
+            file_put_contents($barcode_file, $barcode);
+        }
+        return $barcode_file;
     }
 }

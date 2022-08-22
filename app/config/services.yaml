@@ -24,8 +24,5 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Helper\UserHelper:
         arguments:
-            $uploadDirectory: '%kernel.project_dir%/public/users/'
+            $uploadDirectory: '%kernel.project_dir%'
 
-    App\Helper\VisaHelper:
-        arguments:
-            $rootDir: '%kernel.project_dir%'

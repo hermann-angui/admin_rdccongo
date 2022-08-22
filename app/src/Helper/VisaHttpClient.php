@@ -39,28 +39,23 @@ class VisaHttpClient
 
     public function generateVisa($id)
     {
-        $result = $this->client->request('POST', self::API_URL . 'visa/generate/' . $id);
+        $result = $this->client->request('GET', self::API_URL . 'visa/generate/' . $id);
         return json_decode($result->getContent());
     }
 
     public function changeApplicationStatus($id, $status)
     {
-        $ApproveUrl = 'application/approve/' . $id;
-        $DenyUrl = 'application/deny/' . $id;
-        $NeedMoreUrl = 'application/needmore/' . $id;
-
         switch (strtoupper($status)){
             case 'APPROVE':
-                $result = $this->client->request('POST', self::API_URL . $ApproveUrl);
+                $result = $this->client->request('POST', self::API_URL . 'application/approve/' . $id);
                 return json_decode($result->getContent());
             case 'DENY':
-                $result = $this->client->request('POST', self::API_URL . $DenyUrl);
+                $result = $this->client->request('POST', self::API_URL . 'application/deny/' . $id);
                 return json_decode($result->getContent());
             case 'NEEDMORE':
-                $result = $this->client->request('POST', self::API_URL . $NeedMoreUrl);
+                $result = $this->client->request('POST', self::API_URL . 'application/needmore/' . $id);
                 return json_decode($result->getContent());
         }
-
 
     }
 

@@ -36,29 +36,7 @@
                             {% else %}
                                     <thead>
                                         <tr>
-                                            <th class="col-actions">
-                                                <div class="input-group input-group-sm">
-                                                    <span class="input-group-addon">
-                                                        <input type="checkbox" id="customcheckbox-one0" value="1" data-toggle="checkall" data-target=".page-list">
-                                                    </span>
-
-                                                    <div class="input-group-btn">
-                                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle btn-nospin" data-toggle="dropdown">
-                                                            <i class="fa fa-angle-down "></i>
-                                                        </button>
-                                                        <ul class="pull-left page-list-actions dropdown-menu" role="menu">
-                                                            <li></li>
-                                                            <li>
-                                                                <a class="" href="" data-toggle="confirmation" data-precheck="batchActionPrecheck" data-message="" data-confirm-text="Supprimer" data-confirm-callback="executeBatchAction" data-cancel-text="Annuler" data-cancel-callback="dismissConfirmation">
-                                                                     <span>
-                                                                            <i class="fa fa-book text-primary"></i>
-                                                                            <span>Validate selection</span>
-                                                                     </span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                            <th>
                                             </th>
                                             <th class="visible-sm visible-md visible-lg">Application number</th>
                                             <th class="visible-sm visible-md visible-lg">Visa type</th>
@@ -71,23 +49,12 @@
                                         <tr class="active">
                                             <td>
                                                 <div class="input-group input-group-sm">
-                                                    <span class="input-group-addon">
-                                                        <input type="checkbox" data-target="tbody" data-toggle="selectrow" class="list-checkbox" name="cb122" value="122">
-                                                    </span>
-                                                    <div class="input-group-btn">
-                                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle btn-nospin" data-toggle="dropdown">
-                                                            <i class="fa fa-angle-down "></i>
-                                                        </button>
-                                                        <ul class="pull-left page-list-actions dropdown-menu" role="menu">
-                                                            <li>
-                                                                <a class="hidden-xs" href="{{ path('app_visa_application_details', {id: application.id}) }}" data-toggle="ajax">
-                                                                    <span><i class="fa fa-eye"></i>
-                                                                        <span>View</span>
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                    <a class="hidden-xs" href="{{ path('app_visa_application_details', {id: application.id}) }}" data-toggle="ajax">
+                                                        <span>
+                                                            <i class="fa fa-eye"></i>
+                                                            <span>View</span>
+                                                        </span>
+                                                    </a>
                                                 </div>
                                             </td>
                                             <td>{{ application.applicationNumber }}</td>

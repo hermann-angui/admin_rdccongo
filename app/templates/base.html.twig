@@ -12,22 +12,25 @@
     <link rel="stylesheet" href="{{ asset('media/css/libraries.css') }}"/>
     <link rel="stylesheet" href="{{ asset('media/css/app.css') }}"/>
 
-    <script>
-        var mauticBasePath = '';
-        var mauticBaseUrl = '/';
-        var mauticAjaxUrl = '/s/ajax';
-        var mauticAjaxCsrf = 'e02Y7xIQKrVZm0NSiEWWGQR5Ky1XIQfB9qNwGew-Gp0';
-        var mauticAssetPrefix = '';
-        var mauticContent = 'dashboard';
-        var mauticEnv = 'prod';
-        var mauticLang = {};
-    </script>
-    <script src="{{ asset('media/js/libraries.js') }}"></script>
-    <script src="{{ asset('media/js/app.js') }}"></script>
-    <script defer src="{{ asset('media/fonts/fontawesome-all.js') }}"></script>
-    <script data-source="mautic">
-        var mauticForms = {};
-    </script>
+    {% block javascripts %}
+        <script>
+            var mauticBasePath = '';
+            var mauticBaseUrl = '/';
+            var mauticAjaxUrl = '/s/ajax';
+            var mauticAjaxCsrf = 'e02Y7xIQKrVZm0NSiEWWGQR5Ky1XIQfB9qNwGew-Gp0';
+            var mauticAssetPrefix = '';
+            var mauticContent = 'dashboard';
+            var mauticEnv = 'prod';
+            var mauticLang = {};
+        </script>
+        <script src="{{ asset('media/js/libraries.js') }}"></script>
+        <script src="{{ asset('media/js/app.js') }}"></script>
+        <script defer src="{{ asset('media/fonts/fontawesome-all.js') }}"></script>
+        <script data-source="mautic">
+            var mauticForms = {};
+        </script>
+    {% endblock %}
+
 
 </head>
 <body class="header-fixed">

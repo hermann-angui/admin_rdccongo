@@ -3,14 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Application;
-use App\Helper\VisaHelper;
 use App\Helper\VisaHttpClient;
 use App\Repository\ApplicationRepository;
 use App\Repository\UserRepository;
-use App\Service\EVisaImageGenerator;
-use http\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,18 +16,15 @@ class VisaApplicationController extends AbstractController
 {
     protected UserRepository $userRepository;
     protected ApplicationRepository $applicationRepository;
-    protected EVisaImageGenerator $eVisaImageGenerator;
     protected VisaHttpClient $visaHttpClient;
 
     public function __construct(UserRepository $userRepository,
                                 ApplicationRepository $applicationRepository,
-                                VisaHttpClient $visaHttpClient,
-                                EVisaImageGenerator $eVisaImageGenerator)
+                                VisaHttpClient $visaHttpClient,)
     {
         $this->visaHttpClient = $visaHttpClient;
         $this->userRepository = $userRepository;
         $this->applicationRepository = $applicationRepository;
-        $this->eVisaImageGenerator = $eVisaImageGenerator;
     }
 
     #[Route('/', name: 'app_visa_applications', methods: ['GET','POST'])]
@@ -48,12 +41,19 @@ class VisaApplicationController extends AbstractController
         return $this->render('visa_application/details.html.twig', ['application' => $application, "documents" => $documents]);
     }
 
-
     #[Route('/generate/{id}', name: 'app_visa_application_generate', methods: ['GET'])]
     public function generate(Request $request, Application $application): Response
     {
+        $result = $this->visaHttpClient->generateVisa($application->getId());
         $documents = $this->visaHttpClient->getApplicationById($application->getId());
-        return $this->render('visa_application/generate.html.twig', ['application' => $application, "documents" => $documents]);
+        return $this->render('visa_application/show_generate_visa.html.twig', ['application' => $application, "documents" => $documents]);
+    }
+
+    #[Route('/updatestatus/{id}', name: 'app_visa_application_updatestatus', methods: ['GET'])]
+    public function updateStatus(Request $request, Application $application): Response
+    {
+        $result = $this->visaHttpClient->changeApplicationStatus($application->getId(), $request->query->get('status'));
+        return $this->redirectToRoute('app_visa_application_details', ['id' => $application->getId()]);
     }
 
     #[Route('/display_visa/{id}', name: 'app_visa_application_display', methods: ['GET'])]

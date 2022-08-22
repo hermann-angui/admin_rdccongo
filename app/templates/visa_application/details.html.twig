@@ -5,13 +5,6 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script>
-        function generateVisa(id) {
-            $.get('http://nte.test.xo-dmp.com:85/api/application/' + id, function(data){
-                window.reload();
-            });
-        }
-    </script>
 {% endblock %}
 
 {% block main %}
@@ -30,19 +23,19 @@
                             <div class="toolbar-bundle-buttons pull-left"></div>
                             <div class="toolbar-form-buttons pull-right">
                                 <div class="btn-group toolbar-standard hidden-xs hidden-sm ">
-                                    <a href="http://nte.test.xo-dmp.com:85/api/visa/needmore/{{ application.id }}" class="btn btn-default btn-apply">
+                                    <a href="{{ path('app_visa_application_updatestatus', {id: application.id, status: 'NEEDMORE'}) }}" class="btn btn-default btn-apply">
                                         <i class="fa fa-watch"></i>
                                         Need more info
                                     </a>
-                                    <a href="http://nte.test.xo-dmp.com:85/api/visa/approve/{{ application.id }}" class="btn btn-default btn-apply">
+                                    <a href="{{ path('app_visa_application_updatestatus', {id: application.id, status: 'APPROVE'}) }}" class="btn btn-default btn-apply">
                                         <i class="fa fa-check text-success"></i>
                                         Approve
                                     </a>
-                                    <a href="http://nte.test.xo-dmp.com:85/api/visa/deny/{{ application.id }}" class="btn btn-default btn-apply">
+                                    <a href="{{ path('app_visa_application_updatestatus', {id: application.id, status: 'DENY'}) }}" class="btn btn-default btn-apply">
                                         <i class="fa fa-times text-danger "></i>
                                         Deny
                                     </a>
-                                    <a href="javascript:generateVisa({{ application.id }})" class="btn btn-default btn-apply">
+                                    <a href="{{ path('app_visa_application_generate', {id: application.id}) }}" class="btn btn-default btn-apply">
                                         <i class="fa fa-eye text-warning"></i>
                                         Generate Visa
                                     </a>
@@ -145,7 +138,7 @@
                                                        autocomplete="false" value="{{ application.maritalStatus }}">
                                             </div>
                                             <div class="col-sm-3">
-                                                <label class="control-label mb-xs">Purpose Of Travel</label>
+                                                <label class="control-label mb-xs">Purpose of travel</label>
                                                 <input type="text" id="purpose_of_travel" name="purpose_of_travel"
                                                        class="form-control" placeholder="Purpose of travel"
                                                        autocomplete="false" value="{{ application.purposeOfTravel }}">
@@ -160,7 +153,7 @@
                                         <hr class="mnr-md mnl-md">
                                         <div class="row">
                                             <div class="col-sm-4">
-                                                <label class="control-label mb-xs">passport_type</label>
+                                                <label class="control-label mb-xs">Passport Type</label>
                                                 <input type="text" id="passport_type" name="passport_type"
                                                        class="form-control" placeholder="passport_type"
                                                        autocomplete="false" value="{{ application.passportType }}">

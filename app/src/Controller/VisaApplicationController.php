@@ -46,7 +46,7 @@ class VisaApplicationController extends AbstractController
     {
         $result = $this->visaHttpClient->generateVisa($application->getId());
         $documents = $this->visaHttpClient->getApplicationById($application->getId());
-        return $this->render('visa_application/show_generate_visa.html.twig', ['application' => $application, "documents" => $documents]);
+        return $this->render('visa_application/details.html.twig', ['application' => $application, "documents" => $documents]);
     }
 
     #[Route('/updatestatus/{id}', name: 'app_visa_application_updatestatus', methods: ['GET'])]

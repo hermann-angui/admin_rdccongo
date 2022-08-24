@@ -174,6 +174,55 @@
                                             </div>
                                         </div>
                                         <hr class="mnr-md mnl-md">
+
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label class="control-label mb-xs">Passport Number</label>
+                                                <input type="text" id="passport_type" name="passport_type"
+                                                       class="form-control" placeholder="passport_type"
+                                                       autocomplete="false" value="{{ application.passportNumber }}">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label mb-xs">Departure date</label>
+                                                <input type="text" id="passport_issuedate" name="passport_issuedate"
+                                                       class="form-control" placeholder="Issue Date"
+                                                       autocomplete="false"
+                                                       value="{{ application.firstEntryDate | date }}">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label mb-xs">Returning date</label>
+                                                <input type="text" id="passport_expirydate" name="passport_expirydate"
+                                                       class="form-control" placeholder="Valid until"
+                                                       autocomplete="false"
+                                                       value="{{ application.firstReturningDate | date }}">
+                                            </div>
+                                        </div>
+                                        <hr class="mnr-md mnl-md">
+
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label class="control-label mb-xs">Country of birth</label>
+                                                <input type="text" id="passport_expirydate" name="passport_expirydate"
+                                                       class="form-control" placeholder="Valid until"
+                                                       autocomplete="false"
+                                                       value="{{ application.countryOfBirth }}">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label mb-xs">Place of birth</label>
+                                                <input type="text" id="passport_issuedate" name="passport_issuedate"
+                                                       class="form-control" placeholder="Issue Date"
+                                                       autocomplete="false"
+                                                       value="{{ application.placeOfBirth }}">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label mb-xs">Current nationality</label>
+                                                <input type="text" id="passport_expirydate" name="passport_expirydate"
+                                                       class="form-control" placeholder="Valid until"
+                                                       autocomplete="false"
+                                                       value="{{ application.currentNationality }}">
+                                            </div>
+                                        </div>
+                                        <hr class="mnr-md mnl-md">
                                     </div>
                                 </div>
                             </div>

@@ -3,7 +3,56 @@
 {% block title %}
     Dashboard
 {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        mQuery('document').ready(function(){
+            const ctx = document.getElementById('application_visa').getContext('2d');
+            const myChart1 = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    "labels":[
+                        "Jul 23, 22","Jul 24, 22","Jul 25, 22","Jul 26, 22","Jul 27, 22","Jul 28, 22","Jul 29, 22","Jul 30, 22","Jul 31, 22","Aug 1, 22","Aug 2, 22","Aug 3, 22","Aug 4, 22","Aug 5, 22","Aug 6, 22","Aug 7, 22","Aug 8, 22","Aug 9, 22","Aug 10, 22","Aug 11, 22","Aug 12, 22","Aug 13, 22","Aug 14, 22","Aug 15, 22","Aug 16, 22","Aug 17, 22","Aug 18, 22","Aug 19, 22","Aug 20, 22","Aug 21, 22","Aug 22, 22","Aug 23, 22"],
+                    datasets: [
+                        {
+                            "label":"Daily visa application",
+                            "data":[
+                                "0",0,"0","1","1","2","2","0",0,"3","2","4","1","0","0","2","2","2","1","1","3","3","2","0","1","2","2",0,"3","1","2","1"
+                            ],
+                            "backgroundColor":"rgba(78,93,157,0.1)",
+                            "borderColor":"rgb(0,15,86)",
+                            "pointHoverBackgroundColor":"rgb(0,15,86)",
+                            "pointHoverBorderColor":"rgb(0,15,86)"
+                        }
+                    ]
+                }
+            });
 
+            const myChart2 = new Chart(document.getElementById("application_status").getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ["Deny", "Incomplete", "Approved"],
+                    datasets: [
+                        {
+                            label: "Visa status",
+                            backgroundColor: ["#000f56", "#d11319","#182b83"],
+                            data: [2478,5267,734]
+                        }
+                    ]
+                },
+                options: {
+                    indexAxis: 'y',
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Visa application status'
+                    }
+                }
+            });
+        });
+
+    </script>
+{% endblock %}
 {% block main %}
     <section id="app-content">
         <div class="content-body">
@@ -18,7 +67,6 @@
                     <div class="col-xs-7 col-sm-6 col-md-7 va-m">
                         <div class="toolbar text-right" id="toolbar">
                             <div class="std-toolbar btn-group"><a class="btn btn-default btn-nospin" href=""
-                                                                  onclick="Mautic.saveDashboardLayout('Entrer un nom pour ce tableau de bord :');"
                                                                   data-toggle=""><span><i class="fa fa-save"></i> <span
                                                 class="hidden-xs hidden-sm">Save</span></span></a>
                                 <button type="button" class="btn btn-default btn-nospin dropdown-toggle"
@@ -89,7 +137,46 @@
 
                     <div class="card" style="height: 320px">
                         <div class="card-header">
-                            <h4 class="ui-sortable-handle">Applications created</h4>
+                            <h4 class="ui-sortable-handle">Visa applications</h4>
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true"
+                                   aria-expanded="false">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a href="" data-toggle="ajaxmodal"
+                                           data-target="#MauticSharedModal" data-header="Editer le widget">
+                                            <i class="fa fa-pencil"></i> Edit
+                                        </a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a href="" data-header="Supprimer le widget"
+                                           class="remove-widget">
+                                            <i class="fa fa-remove"></i> Remove
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-wrapper">
+                                <div class="pt-sd pr-md pb-md pl-md">
+                                    <div style="height:250px">
+                                        <canvas id="application_visa" class="chart line-chart chart-rendered" width="1083" height="250" style="display: block; width: 1083px; height: 250px;">
+                                        </canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-flex widget" data-widget-id="5" style="width: 100%; height: 330px">
+
+                    <div class="card" style="height: 320px">
+                        <div class="card-header">
+                            <h4 class="ui-sortable-handle">Incomplete / Denied / Approved</h4>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true"
                                    aria-expanded="false">
@@ -104,63 +191,6 @@
                                     </li>
                                     <li role="separator" class="divider"></li>
                                     <li class="dropdown-header">
-                                        Données chargées en 11.6 ms
-                                    </li>
-                                    <li class="dropdown-header">
-                                        depuis la base de données
-                                    </li>
-                                    <li role="separator" class="divider"></li>
-                                    <li>
-                                        <a href="/s/dashboard/delete/1" data-header="Supprimer le widget"
-                                           class="remove-widget">
-                                            <i class="fa fa-remove"></i> Remove
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-wrapper">
-                                <div class="pt-sd pr-md pb-md pl-md">
-                                    <div style="height:250px">
-                                        <iframe class="chartjs-hidden-iframe" tabindex="-1"
-                                                style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
-                                        <canvas class="chart line-chart chart-rendered" width="1083" height="250"
-                                                style="display: block; width: 1083px; height: 250px;">
-                                            {"labels":["Jul 13, 22","Jul 14, 22","Jul 15, 22","Jul 16, 22","Jul 17,
-                                            22","Jul 18, 22","Jul 19, 22","Jul 20, 22","Jul 21, 22","Jul 22, 22","Jul
-                                            23, 22","Jul 24, 22","Jul 25, 22","Jul 26, 22","Jul 27, 22","Jul 28,
-                                            22","Jul 29, 22","Jul 30, 22","Jul 31, 22","Aug 1, 22","Aug 2, 22","Aug 3,
-                                            22","Aug 4, 22","Aug 5, 22","Aug 6, 22","Aug 7, 22","Aug 8, 22","Aug 9,
-                                            22","Aug 10, 22","Aug 11, 22","Aug 12, 22","Aug 13,
-                                            22"],"datasets":[{"label":"Tous les
-                                            contacts","data":["30","2","3","7","2","8","3","35","2","1","4",0,"6","3","1","2","6","11",0,"12","2","4","1","4","7","11","2","2","1","1","4","3"],"backgroundColor":"rgba(78,93,157,0.1)","borderColor":"rgba(78,93,157,0.8)","pointHoverBackgroundColor":"rgba(78,93,157,0.75)","pointHoverBorderColor":"rgba(78,93,157,1)"}]}
-                                        </canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-flex widget" data-widget-id="5" style="width: 100%; height: 330px">
-
-                    <div class="card" style="height: 320px">
-                        <div class="card-header">
-                            <h4 class="ui-sortable-handle">Validate / Denied</h4>
-                            <div class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true"
-                                   aria-expanded="false">
-                                    <i class="fa fa-ellipsis-v"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li>
-                                        <a href="/s/dashboard/edit/5" data-toggle="ajaxmodal"
-                                           data-target="#MauticSharedModal" data-header="Editer le widget">
-                                            <i class="fa fa-pencil"></i> Edit
-                                        </a>
-                                    </li>
-                                    <li role="separator" class="divider"></li>
-                                    <li class="dropdown-header">
                                         Données chargées en 7.1 ms
                                     </li>
                                     <li class="dropdown-header">
@@ -168,7 +198,7 @@
                                     </li>
                                     <li role="separator" class="divider"></li>
                                     <li>
-                                        <a href="/s/dashboard/delete/5" data-header="Supprimer le widget"
+                                        <a href="" data-header="Supprimer le widget"
                                            class="remove-widget">
                                             <i class="fa fa-remove"></i> Remove
                                         </a>
@@ -180,19 +210,8 @@
                             <div class="chart-wrapper">
                                 <div class="pt-sd pr-md pb-md pl-md">
                                     <div style="height:250px">
-                                        <iframe class="chartjs-hidden-iframe" tabindex="-1"
-                                                style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
-                                        <canvas class="chart line-chart chart-rendered" width="1083" height="250"
-                                                style="display: block; width: 1083px; height: 250px;">
-                                            {"labels":["Jul 13, 22","Jul 14, 22","Jul 15, 22","Jul 16, 22","Jul 17,
-                                            22","Jul 18, 22","Jul 19, 22","Jul 20, 22","Jul 21, 22","Jul 22, 22","Jul
-                                            23, 22","Jul 24, 22","Jul 25, 22","Jul 26, 22","Jul 27, 22","Jul 28,
-                                            22","Jul 29, 22","Jul 30, 22","Jul 31, 22","Aug 1, 22","Aug 2, 22","Aug 3,
-                                            22","Aug 4, 22","Aug 5, 22","Aug 6, 22","Aug 7, 22","Aug 8, 22","Aug 9,
-                                            22","Aug 10, 22","Aug 11, 22","Aug 12, 22","Aug 13,
-                                            22"],"datasets":[{"label":"Emails
-                                            envoy\u00e9s","data":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"backgroundColor":"rgba(78,93,157,0.1)","borderColor":"rgba(78,93,157,0.8)","pointHoverBackgroundColor":"rgba(78,93,157,0.75)","pointHoverBorderColor":"rgba(78,93,157,1)"},{"label":"Emails
-                                            ouverts","data":["1","1","3","1","4","2",0,0,"1","2","4","1",0,"4","2","1","1","1",0,"1",0,"2",0,"2","1","2",0,0,0,0,0,"1"],"backgroundColor":"rgba(0,180,156,0.1)","borderColor":"rgba(0,180,156,0.8)","pointHoverBackgroundColor":"rgba(0,180,156,0.75)","pointHoverBorderColor":"rgba(0,180,156,1)"}]}
+                                        <canvas id="application_status" class="chart line-chart chart-rendered" width="1083" height="250" style="display: block; width: 1083px; height: 250px;">
+
                                         </canvas>
                                     </div>
                                 </div>
